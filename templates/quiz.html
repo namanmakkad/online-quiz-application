@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Online Quiz Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <section class="card quiz-card">
+
+            <!-- Question counter and countdown timer -->
+            <div class="quiz-header">
+                <span id="question-counter" class="badge">Question 1 of 1</span>
+                <span id="timer" class="timer">10:00</span>
+            </div>
+
+            <!-- Progress bar (based on how many questions are answered) -->
+            <div class="progress-wrap">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="progress-text" class="progress-text">0 of 0 answered</p>
+            </div>
+
+            <!-- The current question and its four options are drawn by script.js -->
+            <h2 id="question-text" class="question-text"></h2>
+            <div id="options" class="options"></div>
+
+            <!-- Previous / Next buttons -->
+            <div class="nav-buttons">
+                <button type="button" id="prev-btn" class="btn btn-secondary">&larr; Previous</button>
+                <button type="button" id="next-btn" class="btn btn-primary">Next &rarr;</button>
+            </div>
+
+            <!-- This form sends the answers to the server when the quiz ends -->
+            <form id="quiz-form" action="{{ url_for('submit') }}" method="POST">
+                <div id="hidden-fields"></div>
+                <button type="button" id="submit-btn" class="btn btn-success btn-block">Submit Quiz</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Questions + remaining time passed safely from Flask to JavaScript.
+         Notice: no correct answers are included. -->
+    <script id="quiz-data" type="application/json">{{ quiz_data|tojson }}</script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

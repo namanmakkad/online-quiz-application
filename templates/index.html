@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <section class="card hero">
+            <div class="hero-icon">🧠</div>
+            <h1>Online Quiz Application</h1>
+            <p class="subtitle">
+                Test your General Knowledge with a quick multiple-choice quiz.
+                Answer every question within 10 minutes and see your score instantly.
+            </p>
+
+            <ul class="info-list">
+                <li>📝 One question at a time, four options each</li>
+                <li>⏱️ 10-minute countdown timer</li>
+                <li>📊 Instant result with score and percentage</li>
+            </ul>
+
+            <!-- POST form so a quiz is only started on purpose -->
+            <form action="{{ url_for('start') }}" method="POST">
+                <button type="submit" class="btn btn-primary btn-large">Start Quiz</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

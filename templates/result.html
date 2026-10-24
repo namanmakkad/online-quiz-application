@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result - Online Quiz Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <section class="card result-card">
+            <h1>Quiz Result</h1>
+
+            <!-- Circular score meter: --pct controls how much of the ring is filled -->
+            <div class="score-circle" style="--pct: {{ result.percentage }}">
+                <span>{{ "%.1f"|format(result.percentage) }}%</span>
+            </div>
+
+            <h2 class="result-title">{{ title }}</h2>
+            <p class="subtitle">{{ message }}</p>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-value">{{ result.total_questions }}</span>
+                    <span class="stat-label">Total Questions</span>
+                </div>
+                <div class="stat stat-good">
+                    <span class="stat-value">{{ result.correct_answers }}</span>
+                    <span class="stat-label">Correct</span>
+                </div>
+                <div class="stat stat-bad">
+                    <span class="stat-value">{{ result.incorrect_answers }}</span>
+                    <span class="stat-label">Incorrect (incl. unanswered)</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ result.score }} / {{ result.total_questions }}</span>
+                    <span class="stat-label">Score</span>
+                </div>
+            </div>
+
+            <p class="small-text">Completed on {{ result.completed_at }}</p>
+
+            <form action="{{ url_for('restart') }}" method="POST">
+                <button type="submit" class="btn btn-primary btn-large">Restart Quiz</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="link">Back to Home</a>
+        </section>
+    </main>
+</body>
+</html>
